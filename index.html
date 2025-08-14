@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GR Shops</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        /* Basic styling for cart modal */
+        .cart {
+    display: none;
+    position: fixed;
+    top: 50px;
+    right: 20px;
+    width: 320px;
+    background-color: #f9f9f9;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 999;
+    transition: all 0.3s ease-in-out;
+    font-family: 'Arial', sans-serif;
+}
+
+.cart.open {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.cart h2 {
+    margin: 0 0 15px;
+    font-size: 20px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.cart ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cart ul li {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.cart ul li:last-child {
+    border-bottom: none;
+}
+
+.cart-total {
+    font-weight: bold;
+    font-size: 18px;
+    color: #444;
+    margin-top: 20px;
+    text-align: right;
+}
+
+.cart button {
+    border: 1px solid #f63e4e;
+    color: #f63e4e;
+   
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    font-weight: 900;
+}
+
+.cart button:hover {
+    background-color: #f63e4e;
+    color: white;
+}
+
+.cart .cart-item-title {
+    font-size: 16px;
+    color: #333;
+    margin-right: 10px;
+}
+
+.cart .cart-item-price {
+    font-size: 14px;
+    color: #999;
+}
+
+.cart .close-cart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.3s;
+}
+
+.cart .close-cart:hover {
+    color: #333;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <!-- for navigation bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>GR Shops</h1>
+        </div>
+        <ul class="menu">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#arrival">New Arrival</a></li>
+            <li><a href="#sec">Fashion</a></li>
+            <li><a href="#" id="cart-icon"><i class="fas fa-shopping-cart"></i></a></li>
+        </ul>
+    </nav>
+
+    <!-- Cart Modal -->
+    <div class="cart" id="cart">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart" id="close-cart">&times;</button>
+        </div>
+        <ul id="cart-items" class="cart-items"></ul>
+        <div class="cart-footer">
+            <p class="cart-total">Total: $<span id="total-price">0</span></p>
+
+            <div id="smart-button-container">
+                <div style="text-align: center;">
+                    <div id="paypal-button-container"></div>
+                </div>
+            </div>
+            <script src="https://www.paypal.com/sdk/js?client-id=YOUR_SANDBOX_CLIENT_ID&currency=USD"></script>
+
+
+
+
+
+
+     
+      
+            <script>
+                function initPayPalButton() {
+                    paypal.Buttons({
+                        style: {
+                            shape: 'rect',
+                            color: 'gold',
+                            layout: 'vertical',
+                            label: 'paypal',
+                        },
+
+                        createOrder: function (data, actions) {
+                            return actions.order.create({
+                                purchase_units: [{ "amount": { "currency_code": "USD", "value": totalPrice.toFixed(2) } }]
+                            });
+                        },
+
+                        onApprove: function (data, actions) {
+                            return actions.order.capture().then(function (orderData) {
+                                const element = document.getElementById('paypal-button-container');
+                                element.innerHTML = '';
+                                element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                            });
+                        },
+
+                        onError: function (err) {
+                            console.log(err);
+                        }
+                    }).render('#paypal-button-container');
+                }
+                initPayPalButton();
+            </script>
+        </div>
+    </div>
+
+    <section class="content" id="arrival">
+        <h1>New Arrivals For Men and Women</h1>
+        <p>Get the Best Fashion Arrivals</p>
+        <button>Explore</button>
+    </section>
+
+    <section class="sec" id="sec">
+        <h1 class="pheading">Our Latest Product</h1>
+        <div class="products">
+            <div class="card">
+                <div class="img"><img src="./shirt.jpg" alt=""></div>
+                <div class="desc">Man</div>
+                <div class="title">T-shirt</div>
+                <div class="box">
+                    <div class="price">$50</div>
+                    <button class="btn" onclick="addToCart('T-shirt', 50)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="img"><img src="./purse.webp" alt=""></div>
+                <div class="desc">Woman</div>
+                <div class="title">Purse</div>
+                <div class="box">
+                    <div class="price">$70</div>
+                    <button class="btn" onclick="addToCart('Blouse', 70)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="img"><img src="./OWA198LGDZ_1.webp" alt=""></div>
+                <div class="desc">Man</div>
+                <div class="title">Jacket</div>
+                <div class="box">
+                    <div class="price">$120</div>
+                    <button class="btn" onclick="addToCart('Jacket', 120)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let cartItems = [];
+        let totalPrice = 0;
+
+        // Function to add item to cart
+        function addToCart(item, price) {
+            cartItems.push({ item, price });
+            totalPrice += price;
+            updateCartDisplay();
+            document.getElementById('cart').classList.add('open');
+        }
+
+        // Function to update cart display
+        function updateCartDisplay() {
+            const cartList = document.getElementById('cart-items');
+            const totalDisplay = document.getElementById('total-price');
+            cartList.innerHTML = '';
+            cartItems.forEach((cartItem, index) => {
+                cartList.innerHTML += `<li>${cartItem.item} - $${cartItem.price} <button onclick="removeFromCart(${index})">Remove</button></li>`;
+            });
+            totalDisplay.textContent = totalPrice.toFixed(2);
+        }
+
+        // Function to remove item from cart
+        function removeFromCart(index) {
+            totalPrice -= cartItems[index].price;
+            cartItems.splice(index, 1);
+            updateCartDisplay();
+        }
+
+        // Toggle cart visibility
+        document.getElementById('cart-icon').addEventListener('click', function (e) {
+            e.preventDefault(); // Prevent the link's default behavior
+            document.getElementById('cart').classList.toggle('open');
+        });
+
+        // Close the cart
+        document.getElementById('close-cart').addEventListener('click', function () {
+            document.getElementById('cart').classList.remove('open');
+        });
+    </script>
+
+    <footer>
+        <p>Copyright at <a href="">GR Shops</a></p>
+    </footer>
+
+</body>
+
+</html>
