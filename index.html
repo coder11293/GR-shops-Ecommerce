@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GR Shops</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>GR Shops</h1>
+        </div>
+        <ul class="menu">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#arrival">New Arrival</a></li>
+            <li><a href="#sec">Fashion</a></li>
+            <li><a href="#" id="cart-icon"><i class="fas fa-shopping-cart"></i></a></li>
+        </ul>
+    </nav>
+
+    <!-- Cart Modal -->
+    <div class="cart" id="cart">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart" id="close-cart">&times;</button>
+        </div>
+        <ul id="cart-items" class="cart-items"></ul>
+        <div class="cart-footer">
+            <p class="cart-total">Total: $<span id="total-price">0</span></p>
+            <div id="smart-button-container">
+                <div style="text-align: center;">
+                    <div id="paypal-button-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content sections -->
+    <section class="content" id="arrival">
+        <h1>New Arrivals For Men and Women</h1>
+        <p>Get the Best Fashion Arrivals</p>
+        <button>Explore</button>
+    </section>
+
+    <section class="sec" id="sec">
+        <h1 class="pheading">Our Latest Product</h1>
+        <div class="products">
+            <div class="card">
+                <div class="img"><img src="./shirt.jpg" alt=""></div>
+                <div class="desc">Man</div>
+                <div class="title">T-shirt</div>
+                <div class="box">
+                    <div class="price">$50</div>
+                    <button class="btn" onclick="addToCart('T-shirt', 50)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="img"><img src="./purse.webp" alt=""></div>
+                <div class="desc">Woman</div>
+                <div class="title">Purse</div>
+                <div class="box">
+                    <div class="price">$70</div>
+                    <button class="btn" onclick="addToCart('Purse', 70)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="img"><img src="./OWA198LGDZ_1.webp" alt=""></div>
+                <div class="desc">Man</div>
+                <div class="title">Jacket</div>
+                <div class="box">
+                    <div class="price">$120</div>
+                    <button class="btn" onclick="addToCart('Jacket', 120)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Copyright at <a href="">GR Shops</a></p>
+    </footer>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=AYSegrD0jZElWlt4ruHbeqwR4aIoJMpx0t0q3gXht8YjSYzpVBc7DG6h6Chsx6omDiDF9QITPzyDFPnC&currency=USD"></script>
+    <script src="script.js"></script>
+</body>
+</html>
