@@ -22,14 +22,6 @@ This project includes a **shopping cart** system with add/remove functionality a
 - PayPal JavaScript SDK
 - Font Awesome Icons
 
-## 📷 Screenshots
-
-### Home Page
-![Home Page](./screenshots/homepage.png)
-
-### Shopping Cart
-![Shopping Cart](./screenshots/cart.png)
-
 ## 💳 PayPal Integration Setup
 
 This project uses the **PayPal JavaScript SDK** for payment processing.  
