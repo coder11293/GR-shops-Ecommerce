@@ -39,6 +39,9 @@ You need a **PayPal Developer Account** to get a Client ID and enable sandbox te
 
 ```html
 <script src="https://www.paypal.com/sdk/js?client-id=YOUR_SANDBOX_CLIENT_ID&currency=USD"></script>
+---
+##🚖Live Demo
+[Click here for demo](https://coder11293.github.io/GR-shops-Ecommerce/)
 
 
 
