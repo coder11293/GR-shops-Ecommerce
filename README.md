@@ -1,4 +1,4 @@
-# GR-shops-Ecommerce
+
 # 🛍️ GR Shops - E-Commerce Website
 
 A simple, responsive e-commerce website built with **HTML**, **CSS**, and **JavaScript**.  
